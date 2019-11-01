@@ -32,13 +32,16 @@ export class AuthService {
     })
   }
 
+  get isLoggedIn(): boolean {
+      const user = JSON.parse(localStorage.getItem('user'));
+      return !!user && user.emailVerified;
+  }
+
   // Sign in with email/password
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        });
+        this.router.navigate(['dashboard']);
         this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message)
@@ -74,12 +77,6 @@ export class AuthService {
     }).catch((error) => {
       window.alert(error)
     })
-  }
-
-  // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
   // Sign in with Google
