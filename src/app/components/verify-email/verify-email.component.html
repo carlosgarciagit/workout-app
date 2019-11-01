@@ -1,0 +1,32 @@
+<ion-content class="ion-padding">
+    <form #form="ngForm" (ngSubmit)="authService.ForgotPassword(passwordResetEmail.value)">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+            <div class="ion-text-center">
+              <h3>Thank You for Registering</h3>
+            </div>
+
+            <div class="ion-text-center" *ngIf="true">
+              <p>We have sent a confirmation email to <strong></strong>.</p>
+              <p>Please check your email and click on the link to verify your email address.</p>
+            </div>
+
+            <div class="ion-padding ion-text-center">
+                <ion-button (click)="authService.SendVerificationMail()">
+                  <ion-icon slot="start" name="redo"></ion-icon>
+                  Resend Verification Email
+                </ion-button>
+              </div>
+
+            <div class="redirectToLogin ion-text-center">
+              <ion-text>
+                <span>Go back?<span class="redirect" routerLink="/sign-in"> Log In</span></span>
+              </ion-text>
+            </div>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
