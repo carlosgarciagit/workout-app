@@ -20,6 +20,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FormsModule } from '@angular/forms';
+import { ProgramCardComponent } from './components/program-card/program-card.component';
+import { FirebaseLoaderService } from './shared/services/firebase-loader.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     SignUpComponent,
     DashboardComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    ProgramCardComponent
   ],
   entryComponents: [],
   imports: [
@@ -39,6 +42,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
   providers: [
     AuthService,
+    FirebaseLoaderService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

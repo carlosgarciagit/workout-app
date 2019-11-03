@@ -1,8 +1,19 @@
 <ion-content>
-    <div class="ion-text-center" *ngIf="authService.userData as user">
-        <h3>Weights With Friends: Your user ID is {{user.uid}}</h3>
-      </div>
-    <div class="ion-padding">
-      <ion-button (click)="authService.SignOut()">Log Out</ion-button>
-    </div>
+    <ion-toolbar>
+      <ion-title>Program Dashboard</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="authService.SignOut()">Log Out</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-grid class="programGrid" *ngIf="programCardInfo$ | async as programInfo">
+      <ion-row>
+        <ion-col *ngFor="let program of programInfo">
+          <app-program-card
+          [programName]="program.name"
+          [programDesc]="program.description">
+          </app-program-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
 </ion-content>
