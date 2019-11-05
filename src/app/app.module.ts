@@ -22,6 +22,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { FormsModule } from '@angular/forms';
 import { ProgramCardComponent } from './components/program-card/program-card.component';
 import { FirebaseLoaderService } from './shared/services/firebase-loader.service';
+import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FirebaseLoaderService } from './shared/services/firebase-loader.service
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    ProgramCardComponent
+    ProgramCardComponent,
+    TabsPageComponent
   ],
   entryComponents: [],
   imports: [

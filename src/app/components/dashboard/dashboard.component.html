@@ -1,19 +1,21 @@
-<ion-content>
-    <ion-toolbar>
-      <ion-title>Program Dashboard</ion-title>
-      <ion-buttons slot="end">
-          <ion-button (click)="authService.SignOut()">Log Out</ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-    <ion-grid class="programGrid" *ngIf="programCardInfo$ | async as programInfo">
-      <ion-row>
-        <ion-col *ngFor="let program of programInfo">
-          <app-program-card
-          [programName]="program.name"
-          [programDesc]="program.description">
-          </app-program-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Programs</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="authService.SignOut()">Log out</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
+  <ion-grid tab="home" class="programGrid no-padding" *ngIf="programCardInfo$ | async as programInfo">
+    <ion-row>
+      <ion-col size="6" *ngFor="let program of programInfo">
+        <app-program-card
+        [programName]="program.name"
+        [programDesc]="program.description">
+        </app-program-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

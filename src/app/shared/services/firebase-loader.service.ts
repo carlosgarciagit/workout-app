@@ -12,6 +12,8 @@ export class FirebaseLoaderService {
   public getProgramCards(userId: string): Observable<ProgramCardInfo[]> {
     return of([
       {name: 'Fat Loss Program', description: 'Melt away fat with this intense cardio routine!'} as ProgramCardInfo,
+      {name: 'Mass Gainer 5 Week Program', description: 'Make gainz with this killer workout set'} as ProgramCardInfo,
+      {name: 'Fat Loss Program', description: 'Melt away fat with this intense cardio routine!'} as ProgramCardInfo,
       {name: 'Mass Gainer 5 Week Program', description: 'Make gainz with this killer workout set'} as ProgramCardInfo
     ]);
   }
