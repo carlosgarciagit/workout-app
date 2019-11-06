@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Programs</ion-title>
+    <ion-title>Program Dashboard</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="authService.SignOut()">Log out</ion-button>
     </ion-buttons>
@@ -8,14 +8,40 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid tab="home" class="programGrid no-padding" *ngIf="programCardInfo$ | async as programInfo">
-    <ion-row>
-      <ion-col size="6" *ngFor="let program of programInfo">
-        <app-program-card
-        [programName]="program.name"
-        [programDesc]="program.description">
-        </app-program-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+  <ion-list lines="full">
+
+    <ion-item-divider>
+      <ion-list-header>
+          <ion-label>My Programs</ion-label>
+        <ion-button (click)="openAddProgramModal()" shape="round" size="small" fill="solid" slot="end">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-list-header>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let program of myPrograms$ | async">
+      <ion-label>
+        <!-- TODO: add click element to nav to workout page -->
+        <h2>{{program.name}}</h2>
+        <p>{{program.description}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-list-header>
+        <ion-label>Followed Programs</ion-label>
+      </ion-list-header>
+    </ion-item-divider>
+  
+    <ion-item *ngFor="let program of followedPrograms$ | async">
+      <ion-label>
+        <!-- TODO: add click element to nav to workout page -->
+        <h2>{{program.name}}</h2>
+        <p>{{program.description}}</p>
+      </ion-label>
+    </ion-item>
+    
+  </ion-list>
+
 </ion-content>

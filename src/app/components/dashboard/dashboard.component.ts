@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { FirebaseLoaderService } from '../../shared/services/firebase-loader.service';
 import { Observable } from 'rxjs';
-import { ProgramCardInfo } from 'src/app/shared/services/program-card';
+import { ProgramInfo } from 'src/app/shared/services/program-info';
+import { ModalController } from '@ionic/angular';
+import { AddProgramModalComponent } from '../add-program-modal/add-program-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,15 +13,26 @@ import { ProgramCardInfo } from 'src/app/shared/services/program-card';
 })
 export class DashboardComponent implements OnInit {
 
-  programCardInfo$: Observable<ProgramCardInfo[]>;
+  myPrograms$: Observable<ProgramInfo[]>;
+  followedPrograms$: Observable<ProgramInfo[]>;
 
   constructor(
+    public modalController: ModalController,
     public authService: AuthService,
     public loaderService: FirebaseLoaderService
   ) { }
 
   ngOnInit() {
-    this.programCardInfo$ = this.loaderService.getProgramCards('userId');
+    this.myPrograms$ = this.loaderService.getMyPrograms('userId');
+
+    this.followedPrograms$ = this.loaderService.getFollowedPrograms('userId');
+  }
+
+  async openAddProgramModal() {
+    const modal = await this.modalController.create({
+      component: AddProgramModalComponent
+    });
+    return await modal.present();
   }
 
 }

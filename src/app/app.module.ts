@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import { ProgramCardComponent } from './components/program-card/program-card.component';
 import { FirebaseLoaderService } from './shared/services/firebase-loader.service';
 import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
+import { AddProgramComponent } from './components/add-program/add-program.component';
+import { AddProgramModalComponent } from './components/add-program-modal/add-program-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,11 @@ import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     ProgramCardComponent,
-    TabsPageComponent
+    TabsPageComponent,
+    AddProgramComponent,
+    AddProgramModalComponent
   ],
-  entryComponents: [],
+  entryComponents: [AddProgramModalComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
