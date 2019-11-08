@@ -26,6 +26,7 @@ import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
 import { AddProgramComponent } from './components/add-program/add-program.component';
 import { AddProgramModalComponent } from './components/add-program-modal/add-program-modal.component';
 import { FirebaseUploaderService } from './shared/services/firebase-uploader.service';
+import { HistoryComponent } from './components/history/history.component.ts';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FirebaseUploaderService } from './shared/services/firebase-uploader.ser
     ProgramCardComponent,
     TabsPageComponent,
     AddProgramComponent,
-    AddProgramModalComponent
+    AddProgramModalComponent,
+    HistoryComponent
   ],
   entryComponents: [AddProgramModalComponent],
   imports: [
