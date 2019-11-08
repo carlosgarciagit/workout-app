@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { ProgramInfo } from 'src/app/shared/services/program-info';
 import { ModalController } from '@ionic/angular';
 import { AddProgramModalComponent } from '../add-program-modal/add-program-modal.component';
+import { FirebaseUploaderService } from '../../shared/services/firebase-uploader.service';
+import { Exercise } from '../../shared/models/exercise';
 
 @Component({
   selector: 'app-dashboard',

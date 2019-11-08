@@ -25,6 +25,7 @@ import { FirebaseLoaderService } from './shared/services/firebase-loader.service
 import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
 import { AddProgramComponent } from './components/add-program/add-program.component';
 import { AddProgramModalComponent } from './components/add-program-modal/add-program-modal.component';
+import { FirebaseUploaderService } from './shared/services/firebase-uploader.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AddProgramModalComponent } from './components/add-program-modal/add-pro
   providers: [
     AuthService,
     FirebaseLoaderService,
+    FirebaseUploaderService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
