@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Workout History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list lines="full">
+
+    <!-- <ion-item *ngFor="let program of myPrograms$ | async"> -->
+    <ion-item (click)="goToWorkoutHistory()">
+      <!-- TODO: add click element to nav to workout page -->
+      <div [ngClass]="['history-row']">
+        <ion-label>
+          <h2>Routine 1</h2>
+          <p>Last workout: Workout 1 - Yesterday</p>
+        </ion-label>
+        <ion-label>
+          <h3>See Details</h3>
+        </ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <!-- TODO: add click element to nav to workout history page -->
+      <div [ngClass]="['history-row']">
+        <ion-label>
+          <h2>Fat Loss</h2>
+          <p>Last workout: 2 mile run - 2 days ago</p>
+        </ion-label>
+        <ion-label>
+          <h3>See Details</h3>
+        </ion-label>
+      </div>
+    </ion-item>
+    
+  </ion-list>
+
+</ion-content>

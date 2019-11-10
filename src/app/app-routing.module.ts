@@ -9,6 +9,7 @@ import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard.t
 import { AuthGuard } from './shared/guard/auth.guard';
 import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
 import { AddProgramComponent } from './components/add-program/add-program.component';
+import { HistoryComponent } from './components/history/history.component.ts';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'tabs', component: TabsPageComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'home', component: DashboardComponent }
+      { path: 'home', component: DashboardComponent },
+      { path: 'history', component: HistoryComponent }
     ] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] }
