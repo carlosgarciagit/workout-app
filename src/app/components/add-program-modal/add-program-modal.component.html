@@ -9,5 +9,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <app-add-program></app-add-program>
+    <form [formGroup]="myForm" (ngSubmit)="dismiss()">
+    </form>
 </ion-content>

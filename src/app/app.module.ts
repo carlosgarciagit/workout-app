@@ -19,7 +19,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgramCardComponent } from './components/program-card/program-card.component';
 import { FirebaseLoaderService } from './shared/services/firebase-loader.service';
 import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
@@ -46,6 +46,7 @@ import { FirebaseUploaderService } from './shared/services/firebase-uploader.ser
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
   providers: [
     AuthService,
