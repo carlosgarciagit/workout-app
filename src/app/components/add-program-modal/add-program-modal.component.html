@@ -9,6 +9,85 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <form [formGroup]="myForm" (ngSubmit)="dismiss()">
-    </form>
+  <form [formGroup]="addProgramForm">
+    <ion-item>
+      <ion-label position="floating">Enter program name</ion-label>
+      <ion-input formControlName="programName"></ion-input>
+    </ion-item>
+
+    <mat-accordion formArrayName="workouts">
+
+      <mat-expansion-panel
+      *ngFor="let workout of addProgramForm.controls['workouts'].controls; let i = index"
+      [formGroupName]="i">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Workout {{i + 1}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+        <section formArrayName="exercises">
+          <div *ngFor="let exercise of workout.controls['exercises'].controls; let j = index" [formGroupName]="j">
+
+              <ion-list-header>
+                <ion-label><b>Exercise {{j + 1}}</b></ion-label>
+                <ion-buttons>
+                  <ion-button (click)="removeExercise(workout, j)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-list-header>
+
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Exercise name</ion-label>
+                  <ion-input formControlName="exerciseName"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Sets</ion-label>
+                  <ion-input formControlName="sets"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Reps</ion-label>
+                  <ion-input formControlName="reps"></ion-input>
+                </ion-item>
+              </ion-col>  
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Duration</ion-label>
+                  <ion-input formControlName="duration"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          </div>
+          <ion-button (click)="addExercise(workout)">
+            <ion-label>Add exercise</ion-label>
+          </ion-button>
+        </section>
+
+        <ion-button *ngIf="addProgramForm.controls['workouts'].controls.length > 1" (click)="removeWorkout(i)">
+          <ion-label>Remove workout</ion-label>
+        </ion-button>
+        
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <ion-button (click)="addWorkout()">
+      <ion-icon name="add"></ion-icon>
+      <ion-label>Add a new workout</ion-label>
+    </ion-button>
+    <ion-button (click)="printForm()">
+      <ion-label>Print form</ion-label>
+    </ion-button>
+  </form>
 </ion-content>
