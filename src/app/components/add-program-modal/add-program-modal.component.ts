@@ -9,44 +9,63 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@ang
 })
 export class AddProgramModalComponent {
 
-  public myForm: FormGroup;
+  public addProgramForm: FormGroup;
   public workoutCount = 1;
 
   constructor(
     public modalCtrl: ModalController,
     private formBuilder: FormBuilder
   ) {
-    this.myForm = formBuilder.group({
-      name: ['', Validators.required],
+    this.addProgramForm = formBuilder.group({
+      programName: ['', Validators.required],
       workouts: this.formBuilder.array([
         this.initWorkout(),
     ])
     });
   }
 
+  printForm() {
+    console.log(this.addProgramForm.value);
+  }
+
   addWorkout() {
-    const control = this.myForm.controls.workouts as FormArray;
+    const control = this.addProgramForm.controls.workouts as FormArray;
     control.push(this.initWorkout());
   }
 
+  addExercise(workout: FormGroup) {
+    const exercises = workout.controls.exercises as FormArray;
+    exercises.push(this.initExercise());
+  }
+
   initWorkout() {
-    return this.formBuilder.array([
-      this.initExercise(),
-    ]);
+    return this.formBuilder.group({
+      workoutName: ['', Validators.required],
+      exercises: this.formBuilder.array([
+        this.initExercise(),
+      ])
+    });
   }
 
   initExercise() {
     return this.formBuilder.group({
-        name: ['', Validators.required],
+        exerciseName: ['', Validators.required],
         reps: [],
         sets: [],
-        duration: [],
-        superSet: []
+        duration: []
     });
   }
 
-  removeWorkout(control) {
-    this.myForm.removeControl(control.key);
+  removeWorkout(index: number) {
+    const workoutArray = this.addProgramForm.controls.workouts as FormArray;
+
+    workoutArray.removeAt(index);
+  }
+
+  removeExercise(workout: FormGroup, index: number) {
+    const exerciseArray = workout.controls.exercises as FormArray;
+
+    exerciseArray.removeAt(index);
   }
 
   dismiss() {

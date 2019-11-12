@@ -23,10 +23,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgramCardComponent } from './components/program-card/program-card.component';
 import { FirebaseLoaderService } from './shared/services/firebase-loader.service';
 import { TabsPageComponent } from './components/tabs-page/tabs-page.component';
-import { AddProgramComponent } from './components/add-program/add-program.component';
 import { AddProgramModalComponent } from './components/add-program-modal/add-program-modal.component';
 import { FirebaseUploaderService } from './shared/services/firebase-uploader.service';
-import { HistoryComponent } from './components/history/history.component.ts';
+import { HistoryComponent } from './components/history/history.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,6 @@ import { HistoryComponent } from './components/history/history.component.ts';
     VerifyEmailComponent,
     ProgramCardComponent,
     TabsPageComponent,
-    AddProgramComponent,
     AddProgramModalComponent,
     HistoryComponent
   ],
@@ -49,6 +48,7 @@ import { HistoryComponent } from './components/history/history.component.ts';
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
   providers: [
     AuthService,
