@@ -3,37 +3,39 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Exercise } from '../models/exercise';
 import { Workout } from '../models/workout';
 import { Program } from '../models/program';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseUploaderService {
 
-  private exerciseCollection;
-  private workoutCollection;
   private programCollection;
 
-  constructor(db: AngularFirestore) {
-    this.exerciseCollection = db.collection('exercises');
-    this.workoutCollection = db.collection('workouts');
+  constructor(private db: AngularFirestore) {
     this.programCollection = db.collection('programs');
   }
 
-  addProgram(program: Program) {
+  postProgram(program: Program) {
     this.programCollection.add(program)
-    .then(console.log('Successfully posted the program'))
+    .then(res => {
+      const programId = res.id;
+      const userId = JSON.parse(localStorage.getItem('user')).uid;
+
+      this.addProgramToUser(userId, programId);
+    })
     .catch(error => console.log(error));
   }
 
-  addWorkout(workout: Workout) {
-    this.workoutCollection.add(workout)
-    .then(console.log('Successfully posted the workout'))
-    .catch(error => console.log(error));
-  }
-
-  addExercise(exercise: Exercise) {
-    this.exerciseCollection.add(exercise)
-    .then(console.log('Successfully posted the exercise'))
-    .catch(error => console.log(error));
+  addProgramToUser(userId: string, programId: string) {
+    this.db.collection('users').doc(userId).get().pipe(
+      take(1),
+      map(res => res.data().programIds),
+    ).subscribe( ids => {
+        this.db.collection('users').doc(userId).update({
+          programIds: [...ids, programId]
+        });
+      }
+    );
   }
 }

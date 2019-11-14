@@ -14,6 +14,10 @@
       <ion-label position="floating">Enter program name</ion-label>
       <ion-input formControlName="programName"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label position="floating">Enter program description</ion-label>
+      <ion-input formControlName="programDesc"></ion-input>
+    </ion-item>
 
     <mat-accordion formArrayName="workouts">
 
@@ -32,7 +36,7 @@
 
               <ion-list-header>
                 <ion-label><b>Exercise {{j + 1}}</b></ion-label>
-                <ion-buttons>
+                <ion-buttons *ngIf="workout.controls['exercises'].controls.length > 1">
                   <ion-button (click)="removeExercise(workout, j)">
                     <ion-icon name="trash"></ion-icon>
                   </ion-button>
@@ -86,8 +90,11 @@
       <ion-icon name="add"></ion-icon>
       <ion-label>Add a new workout</ion-label>
     </ion-button>
-    <ion-button (click)="printForm()">
-      <ion-label>Print form</ion-label>
-    </ion-button>
+    
   </form>
 </ion-content>
+<ion-footer no-border>
+  <ion-toolbar transparent>
+    <ion-button class="ion-text-uppercase" size="full" (click)="submitProgram()">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

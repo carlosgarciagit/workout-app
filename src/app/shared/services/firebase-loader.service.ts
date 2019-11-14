@@ -1,24 +1,49 @@
 import { Injectable } from '@angular/core';
-import { ProgramInfo } from './program-info';
 import { of, Observable } from 'rxjs';
+import { map, take, tap, switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Program } from '../models/program';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseLoaderService {
 
-  constructor() { }
+  private programCollection;
 
-  public getMyPrograms(userId: string): Observable<ProgramInfo[]> {
-    return of([
-      {name: 'Fat Loss Program', description: 'Melt away fat with this intense cardio routine!'} as ProgramInfo,
-      {name: 'Mass Gainer 5 Week Program', description: 'Make gainz with this killer workout set'} as ProgramInfo
-    ]);
+  constructor(private db: AngularFirestore) {
+    this.programCollection = this.db.collection('programs');
+   }
+
+  public getMyProgramsIds(): Observable<string[]> {
+    const userId = JSON.parse(localStorage.getItem('user')).uid;
+
+    return this.db.collection('users').doc(userId).get().pipe(
+      take(1),
+      map(res => res.data().programIds)
+    );
   }
 
-  public getFollowedPrograms(userId: string): Observable<ProgramInfo[]> {
-    return of([
-      {name: 'Omars Fat Gaining Program', description: 'Follow Omars program to make you fatter'} as ProgramInfo
-    ]);
+  public getMyPrograms(): Observable<Program[]> {
+      return this.getMyProgramsIds().pipe(
+        take(1),
+        switchMap(ids => {
+          const programs = [];
+
+          ids.forEach(id => {
+            this.programCollection.doc(id).get().pipe(
+              take(1),
+            ).subscribe(
+              program => programs.push(program.data())
+            );
+          });
+
+          return of(programs);
+        })
+      );
+  }
+
+  public getFollowedPrograms(userId: string): Observable<Program[]> {
+    return of([]);
   }
 }
