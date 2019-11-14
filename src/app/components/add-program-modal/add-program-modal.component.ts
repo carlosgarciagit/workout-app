@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+import { FirebaseUploaderService } from '../../shared/services/firebase-uploader.service';
+import { convertFormToProgram } from '../../shared/form-converter';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-add-program-modal',
@@ -14,18 +18,24 @@ export class AddProgramModalComponent {
 
   constructor(
     public modalCtrl: ModalController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private uploader: FirebaseUploaderService,
+    private router: Router
   ) {
     this.addProgramForm = formBuilder.group({
       programName: ['', Validators.required],
+      programDesc: ['', Validators.required],
       workouts: this.formBuilder.array([
         this.initWorkout(),
     ])
     });
   }
 
-  printForm() {
-    console.log(this.addProgramForm.value);
+  submitProgram() {
+    const program = convertFormToProgram(this.addProgramForm);
+    this.uploader.postProgram(program);
+
+    this.modalCtrl.dismiss();
   }
 
   addWorkout() {
